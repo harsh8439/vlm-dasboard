@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import './Dashboard.css';
 
 // --- Shared SVGs & Icons ---
@@ -42,7 +43,7 @@ const BackgroundGlows = () => (
 
 // --- Subcomponents ---
 
-const TopHeader = () => (
+const TopHeader = ({ navigate }) => (
   <header className="desk-header glass-panel">
     <div className="header-left">
       <div className="logo-section">
@@ -73,7 +74,12 @@ const TopHeader = () => (
       </div>
 
       <button className="btn-outline">Log in</button>
-      <button className="btn-solid-cyan">Join for free</button>
+      <button 
+  className="btn-solid-cyan"
+  onClick={() => navigate("/Joinfree")}
+>
+  Join for free
+</button>
     </div>
   </header>
 );
@@ -111,10 +117,11 @@ const FeatureCard = ({ icon, title, desc, highlightColor }) => (
 // --- MAIN DASHBOARD SCREEN ---
 
 export default function DesktopDashboard() {
+  const navigate = useNavigate();
   return (
     <div className="desktop-layout splash-bg">
       <BackgroundGlows />
-      <TopHeader />
+      <TopHeader navigate={navigate} />
 
       <main className="main-container">
         <MainNavigation />
@@ -128,7 +135,12 @@ export default function DesktopDashboard() {
                  <div className="hb-price-line">Premium Family Plan at <span className="text-gold">₹4,999/mo</span></div>
               </div>
               <div className="hb-actions mt-30">
-                 <button className="btn-solid-purple">Start 3-Day Free Trial</button>
+                 <button 
+  className="btn-solid-purple"
+  onClick={() => navigate("/startfree")}
+>
+  Start 3-Day Free Trial
+</button>
                  <div className="hb-code-box">
                     <span className="code-lbl">Use code</span>
                     <span className="code-val">VLM2026</span>
