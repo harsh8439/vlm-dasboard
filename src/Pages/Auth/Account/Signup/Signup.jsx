@@ -122,7 +122,7 @@ const Signup = () => {
                </div>
             </div>
 
-            <form className="login-form" onSubmit={handleRegister}>
+            <form className="login-form"  >
               <div className="input-group">
                 <input type="text" name="fullName" placeholder="Full name" required onChange={handleChange} />
               </div>
