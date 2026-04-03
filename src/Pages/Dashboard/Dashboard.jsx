@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import './Dashboard.css';
+import TopTeachersSection from './TopTeachers/TopTeachers';
+import ContactUs from './ContactUs/ContactUs';
+import Footer from './Footer/Footer';
 
 // --- Shared SVGs & Icons ---
 const VlmShieldLogo = () => (
@@ -42,7 +46,7 @@ const BackgroundGlows = () => (
 
 // --- Subcomponents ---
 
-const TopHeader = () => (
+const TopHeader = ({ navigate }) => (
   <header className="desk-header glass-panel">
     <div className="header-left">
       <div className="logo-section">
@@ -72,15 +76,43 @@ const TopHeader = () => (
         <svg viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
       </div>
 
-      <button className="btn-outline">Log in</button>
-      <button className="btn-solid-cyan">Join for free</button>
+      <button 
+  className="btn-outline"
+  onClick={() => navigate("/login")}
+>
+  Log in
+</button>
+      <button 
+  className="btn-solid-cyan"
+  onClick={() => navigate("/Joinfree")}
+>
+  Join for free
+</button>
     </div>
   </header>
 );
 
 const MainNavigation = () => {
   const [activeTab, setActiveTab] = useState('Overview');
-  const tabs =['Overview', 'Live Classes', 'AI Doubt Solver', 'Video Reels', 'Leaderboard', 'Parent Portal', 'Pricing Plans'];
+  const navigate = useNavigate(); // 👈 YAHI ADD HOGA
+
+  const tabs = [
+    'Overview',
+    'Live Classes',
+    'AI Doubt Solver',
+    'Video Reels',
+    'Leaderboard',
+    'Parent Portal',
+    'Pricing Plans'
+  ];
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+
+    if (tab === "Pricing Plans") {
+      navigate("/startfree"); // 👈 YAHI SE PAGE OPEN HOGA
+    }
+  };
 
   return (
     <nav className="main-nav">
@@ -88,7 +120,7 @@ const MainNavigation = () => {
         <div 
           key={tab} 
           className={`nav-tab ${activeTab === tab ? 'active' : ''}`}
-          onClick={() => setActiveTab(tab)}
+          onClick={() => handleTabClick(tab)} // 👈 YAHI CHANGE
         >
           {tab}
         </div>
@@ -111,10 +143,11 @@ const FeatureCard = ({ icon, title, desc, highlightColor }) => (
 // --- MAIN DASHBOARD SCREEN ---
 
 export default function DesktopDashboard() {
+  const navigate = useNavigate();
   return (
     <div className="desktop-layout splash-bg">
       <BackgroundGlows />
-      <TopHeader />
+      <TopHeader navigate={navigate} />
 
       <main className="main-container">
         <MainNavigation />
@@ -128,7 +161,12 @@ export default function DesktopDashboard() {
                  <div className="hb-price-line">Premium Family Plan at <span className="text-gold">₹4,999/mo</span></div>
               </div>
               <div className="hb-actions mt-30">
-                 <button className="btn-solid-purple">Start 3-Day Free Trial</button>
+                 <button 
+  className="btn-solid-purple"
+  onClick={() => navigate("/startfree")}
+>
+  Start 3-Day Free Trial
+</button>
                  <div className="hb-code-box">
                     <span className="code-lbl">Use code</span>
                     <span className="code-val">VLM2026</span>
@@ -162,7 +200,12 @@ export default function DesktopDashboard() {
            <div className="aa-right">
               <div className="aa-buttons-row">
                  <button className="btn-outline-cyan">Try AI Doubt Solver</button>
-                 <button className="btn-solid-cyan">View Subscription Plans</button>
+                 <button 
+  className="btn-solid-cyan"
+  onClick={() => navigate("/startfree")}
+>
+  View Subscription Plans
+</button>
               </div>
               <div className="aa-offer-link mt-10 text-gold">
                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h8"/></svg>
@@ -210,6 +253,10 @@ export default function DesktopDashboard() {
              desc="Earn points, climb the global leaderboard, and spin the wheel for exclusive VLM rewards."
            />
         </section>
+
+        <TopTeachersSection/>
+        <ContactUs/>
+        <Footer/>
 
       </main>
 
