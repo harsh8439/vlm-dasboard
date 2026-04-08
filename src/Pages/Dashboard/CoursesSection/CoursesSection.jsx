@@ -113,7 +113,7 @@ const CoursesSection = () => {
       const maxScrollLeft = track.scrollWidth - track.clientWidth;
       if (maxScrollLeft <= 0) return;
 
-        const isScrollingDown = event.deltaY > 0;
+        const isScrollingDown = event.deltaY > 0;   
       const isScrollingUp = event.deltaY < 0;
       const atStart = track.scrollLeft <= 0;
       const atEnd = track.scrollLeft >= maxScrollLeft - 1;
@@ -122,18 +122,18 @@ const CoursesSection = () => {
 
         if (shouldLockVertical) {
         event.preventDefault();
-        track.scrollLeft += event.deltaY;
+        track.scrollLeft += event.deltaY * 0.8;
       }
     };
     updateScrollDistance();
 
       window.addEventListener('resize', updateScrollDistance);
-    window.addEventListener('wheel', handleWheel, { passive: false });
+    wrapper.addEventListener('wheel', handleWheel, { passive: false });
 
-  return () => {
-      window.removeEventListener('resize', updateScrollDistance);
-      window.removeEventListener('wheel', handleWheel);
-    };
+return () => {
+  window.removeEventListener('resize', updateScrollDistance);
+  wrapper.removeEventListener('wheel', handleWheel);
+};
   }, []);
 
   return (
