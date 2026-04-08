@@ -9,6 +9,7 @@ import FeaturesSection from '../Dashboard/FeaturesSection/FeaturesSection';
 import TopTeachersSection from './TopTeachers/TopTeachers';
 import ContactUs from './ContactUs/ContactUs';
 import Footer from './Footer/Footer';
+import CoursesSection from './CoursesSection/CoursesSection';
 
 const BackgroundGlows = () => (
   <div className="desk-bg-glows">
@@ -59,6 +60,7 @@ export default function DesktopDashboard() {
         <MainNavigation />
         <HeroSection navigate={navigate} />
         <FeaturesSection navigate={navigate} />
+        <CoursesSection/>
         <TopTeachersSection />
         <ContactUs />
       </main>
