@@ -30,7 +30,7 @@ const BackgroundGlows = () => (
 const MainNavigation = () => {
   const [activeTab, setActiveTab] = useState('Overview');
   const navigate = useNavigate();
-  const tabs = ['Overview', 'Live Classes', 'AI Doubt Solver', 'Video Reels', 'Leaderboard', 'Parent Portal', 'Pricing Plans'];
+  const tabs = ['Overview', 'Live Classes', 'AI Doubtdfa Solver', 'Video Reels', 'Leaderboard', 'Parent Portal', 'Pricing Plans'];
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
