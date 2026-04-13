@@ -12,10 +12,8 @@
 
 .courses-section-wrapper {
   position: relative;
-  min-height: calc(100vh + var(--horizontal-scroll-distance, 0px));
-  width: 100%;
+  height: 100vh; /* FIX */
 }
-
 .sticky-container {
   position: sticky;
   top: 0;
@@ -156,3 +154,6 @@
   color: #fff;
 }
 
+.horizontal-scroll-track {
+  scroll-behavior: smooth;
+}
